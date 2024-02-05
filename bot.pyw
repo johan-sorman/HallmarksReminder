@@ -25,12 +25,12 @@ client = commands.Bot(command_prefix='!', intents=intents)
 #############################################################################
 now = datetime.datetime.now()
 
-patchday_url = 'http://www.playonline.com/ff11us/info/list_mnt.shtml'
-github_url = 'https://github.com/johan-sorman?tab=repositories'
+version_update_url = 'http://www.playonline.com/ff11us/info/list_mnt.shtml'
+reward_url = 'https://www.bg-wiki.com/ffxi/Category:Ambuscade#Rewards'
 footer_text = '© {year} - Created by Melucine@Bahamut'.format(year=now.year)
 
 #############################################################################
-## Bot
+## Bot comes online
 #############################################################################
 
 @client.event
@@ -46,8 +46,8 @@ async def on_ready():
 @tasks.loop(hours=24)
 async def daily_message():
     last_day_of_month = calendar.monthrange(now.year, now.month)[1]
-    start_date = datetime.datetime(now.year, now.month, 1)
-    end_date = datetime.datetime(now.year, now.month, min(7, last_day_of_month))
+    start_date = datetime.datetime(now.year, now.month, 8)
+    end_date = datetime.datetime(now.year, now.month, min(12, last_day_of_month))
 
     if start_date <= now <= end_date:
         # Fetch the latest data from the database
@@ -65,48 +65,40 @@ async def daily_message():
                         # Extract the year, month, and day from the retrieved date
                         latest_update_year, latest_update_month, _ = map(int, latest_update_date.split('-'))
 
-                        # Print statements for debugging
-                        print(f"now.month: {now.month}")
-                        print(f"now.year: {now.year}")
-                        print(f"latest_update_month: {latest_update_month}")
-                        print(f"latest_update_year: {latest_update_year}")
-                        print(f"Condition result: {latest_update_month == now.month and latest_update_year == now.year}")
-
-                        # Check if the retrieved date is in the current month
                         if latest_update_month == now.month and latest_update_year == now.year:
                             embed = discord.Embed(
                                 title='Message from Gorpa-Masorpa',
                                 description='',
-                                color=0x808000
-                            )
-                            embed.add_field(name='Hey Adventurers!', value='This is your daily reminder from me, Gorpa-Masorpa! Please spend your hallmarks before the next update, or you\'ll lose them!', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'The next version update is expected to occur on **{latest_update_date}** \n\n You can find the next version update schedule on [PlayOnline]({patchday_url})', inline=False)                     
-                            embed.set_footer(text=footer_text.format(year=now.year, url=github_url))
+                                color=0x808000)
                             
-                            print(f"Constructed Embed: {embed}")
-
+                            embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!', inline=False)
+                            embed.add_field(name='Next Version Update:', value=f'The next version update is expected to occur on **{latest_update_date}** \n You can find the next version update schedule on [PlayOnline]({version_update_url})', inline=False)                     
+                            embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
+
                         else:
+
                             embed = discord.Embed(
                             title='Message from Gorpa-Masorpa',
                             description='',
-                            color=0x808000
-                            )
-                            embed.add_field(name='Hey Adventurers!', value='This is your daily reminder from me, Gorpa-Masorpa! Please spend your hallmarks before the next update, or you\'ll lose them!', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'\n\n You can find the next version update on [PlayOnline]({patchday_url})',inline=False)                     
-                            embed.set_footer(text=footer_text.format(year=now.year, url=github_url))
-                            await channel.send(embed=embed)
-                    else:
-                            embed = discord.Embed(
-                            title='Message from Gorpa-Masorpa',
-                            description='',
-                            color=0x808000
-                            )
-                            embed.add_field(name='Hey Adventurers!', value='This is your daily reminder from me, Gorpa-Masorpa! Please spend your hallmarks before the next update, or you\'ll lose them!', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'\n\n You can find the next version update on [PlayOnline]({patchday_url})',inline=False)                     
-                            embed.set_footer(text=footer_text.format(year=now.year, url=github_url))
+                            color=0x808000)
+
+                            embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!', inline=False)
+                            embed.add_field(name='Next Version Update:', value=f'\n You can find the next version update on [PlayOnline]({version_update_url})',inline=False)                     
+                            embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
 
+                    else:
+                            
+                            embed = discord.Embed(
+                            title='Message from Gorpa-Masorpa',
+                            description='',
+                            color=0x808000)
+
+                            embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!', inline=False)
+                            embed.add_field(name='Next Version Update:', value=f'The next version update is expected to occur on *Unknown* \n You can find the next version update schedule on [PlayOnline]({version_update_url})', inline=False)
+                            embed.set_footer(text=footer_text)
+                            await channel.send(embed=embed)
 
 def get_latest_update():
     conn = sqlite3.connect('version_updates.db')
@@ -128,11 +120,8 @@ def get_latest_update():
     ''')
 
     latest_update = cursor.fetchone()
-
     conn.close()
-
     return latest_update
-
 
 ## !hm command
 @client.command(name='hm')
@@ -142,21 +131,22 @@ async def send_message(ctx):
             embed = discord.Embed(
                 title='Message from Gorpa-Masorpa',
                 description='',
-                color=0x808000
-            )
-            embed.add_field(name='Hey Adventures!', value='This is your daily reminder from me, Gorpa-Masorpa! Please spend your hallmarks before the next update, or you\'ll lose them! \n\n You can find the next update schedule on [PlayOnline]({})'.format(patchday_url), inline=False)
-            embed.set_footer(text=footer_text.format(year=now.year, url=github_url))
+                color=0x808000)
+            
+            embed.add_field(name='Hey Adventures!', value='This is your daily reminder from me, Gorpa-Masorpa! Please spend your hallmarks before the next update, or you\'ll lose them! \n\n You can find the next update schedule on [PlayOnline]({})'.format(version_update_url), inline=False)
+            embed.set_footer(text=footer_text)
             await ctx.send(embed=embed)
+
         else:
             allowed_channels_list = ', '.join(ALLOWED_CHANNELS)
             embed = discord.Embed(
                 title='Error',
                 description=f"Sorry! My master told me I'm only allowed to post in the following channels: {allowed_channels_list}",
-                color=0xff0000
-            )
-            embed.set_footer(text=footer_text.format(year=now.year, url=github_url))
+                color=0xff0000)
+            
+            embed.set_footer(text=footer_text)
             await ctx.send(embed=embed)
+
     else:
         await ctx.send("You do not have permission to use this command.")
-
 client.run(TOKEN)
