@@ -4,7 +4,7 @@
 
 - A Simple bot to remind the users to spend their Hallmarks and Gallantry before next version update.
 - It will work in two steps:
-  1. `main.pyw` will scrape Playonline website and assume next version update date based on the `Login Points` campaign.
+  1. `main.pyw` will scrape Playonline website and assume next version update date based on the `Login Points campaign`.
   2. After scraped the information and populated a local `.db` it will then use this information in the `bot.pyw`. 
 
 ### Cool, how does it actually work?
@@ -15,7 +15,7 @@
 ### Setup
 
 The bot assumes at least one of the follow channels:
-`bots`, `bot`, `bot-command`, `ambuscade`
+`bot, bots, bot-command, ambuscade`
 - Note that should you have multiple of these setup on your server for whatever reason, it will post in all of them. Therefor recommended just use one of those or restrict the bot to post in the channel.
 
 ### Commands?
