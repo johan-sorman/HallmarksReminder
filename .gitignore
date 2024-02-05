@@ -41,3 +41,9 @@ luac.out
 
 # Enviroments
 *.env
+
+# Database
+*.db
+
+# Pycache
+*__pycache__/
