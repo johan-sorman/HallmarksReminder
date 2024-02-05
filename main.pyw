@@ -25,7 +25,7 @@ def main():
         print("Unable to retrieve version update date.")
         print(url)
 
-schedule.every().month.at("12:00").day.at("07:00").do(main)
+schedule.every().month.day.at("07:00").do(main)
 
 while True:
     schedule.run_pending()
