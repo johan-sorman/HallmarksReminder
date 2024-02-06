@@ -2,7 +2,7 @@ from extract_update_info import extract_update_info
 from database_operations import initialize_database, insert_update_info
 
 if __name__ == "__main__":
-    db_file = 'updates.db'
+    db_file = 'db/updates.db'
     
     # Initialize the database if it doesn't exist
     initialize_database(db_file)

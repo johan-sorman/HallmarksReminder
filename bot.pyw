@@ -13,6 +13,7 @@ import sqlite3
 #############################################################################
 
 TOKEN = os.getenv('DISCORD_TOKEN_HALLMARKS')
+DB_PATH = os.getenv('DB_PATH')
 ALLOWED_CHANNELS = ['bots', 'bot', 'bot-command', 'ambuscade']
 intents = discord.Intents.default()
 intents.messages = True
@@ -103,7 +104,7 @@ async def daily_message():
 
 
 def get_latest_update():
-    conn = sqlite3.connect('updates.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     # Ensure the table exists
