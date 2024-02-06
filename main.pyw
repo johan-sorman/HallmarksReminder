@@ -2,9 +2,8 @@ from extract_update_info import extract_update_info
 from database_operations import initialize_database, insert_update_info
 import os
 from dotenv import load_dotenv
-import schedule
-import time
 import datetime
+import time
 
 load_dotenv()
 
@@ -21,15 +20,9 @@ def job():
     else:
         print("No entry found.")
 
-schedule.every(24).hours.do(job)
-
-def is_first_week_of_month():
-    today = datetime.datetime.now()
-    return today.day <= 7
-
-if is_first_week_of_month():
-    job()
-
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+    now = datetime.datetime.now()
+    if now.day >= 1 and now.day <= 7:
+        job()
+    
+    time.sleep(24 * 60 * 60)
