@@ -47,3 +47,6 @@ luac.out
 
 # Pycache
 *__pycache__/
+
+# Old files but keep around for backup
+*.*old
