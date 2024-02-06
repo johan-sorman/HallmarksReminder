@@ -16,4 +16,4 @@ The bot assumes at least one of the following channels:
 - Note that if you have multiple of these setups on your server for whatever reason, it will post in all of them. Therefore recommended to use one of those or restrict the bot from posting in the channel.
 
 ### Commands?
-There are no commands, the bot works automatically. 
+There are no commands, the bot works automatically.
