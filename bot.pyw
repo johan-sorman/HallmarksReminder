@@ -1,12 +1,12 @@
 import datetime
 import calendar
 import os
+from dotenv import load_dotenv
 import discord
 from discord.ext import tasks, commands
 import sqlite3
 
-# Load environment variables if needed
-# load_dotenv()
+load_dotenv()
 
 #############################################################################
 ## Discord Configuration
