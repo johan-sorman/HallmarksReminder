@@ -71,7 +71,7 @@ async def daily_message():
                             
                             embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!\n\n ➡️ Come see me at (G-9) in Mhaura', inline=False)
                             embed.add_field(name='', value='', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `{latest_update_date}, {latest_update_year}`\n\n For accurate informaiton visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
+                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `{latest_update_date}, {latest_update_year}`\n\n For accurate information visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
                             embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
 
@@ -83,7 +83,7 @@ async def daily_message():
 
                             embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!\n\n ➡️ Come see me at (G-9) in Mhaura', inline=False)
                             embed.add_field(name='', value='', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `None`\n\n For accurate informaiton visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
+                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `None`\n\n For accurate information visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
                             embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
 
@@ -95,7 +95,7 @@ async def daily_message():
 
                             embed.add_field(name='Hey Adventurers!', value=f'This is your daily reminder from me, Gorpa-Masorpa! Please spend your [Hallmarks]({reward_url}) and [Gallantry]({reward_url}) before the next update, or you\'ll lose them!\n\n ➡️ Come see me at (G-9) in Mhaura', inline=False)
                             embed.add_field(name='', value='', inline=False)
-                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `None`\n\n For accurate informaiton visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
+                            embed.add_field(name='Next Version Update:', value=f'The next version update is guesstimated to occur on \n\n `None`\n\n For accurate information visit the Playonline website. \n You can find the next version update schedule [here]({version_update_url}).', inline=False)                     
                             embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
 
