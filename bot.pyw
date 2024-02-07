@@ -12,9 +12,9 @@ load_dotenv()
 ## Discord Configuration
 #############################################################################
 
-TOKEN = os.getenv('DISCORD_TOKEN_HALLMARKS')
+TOKEN = os.getenv('DISCORD_TOKEN_GORPA_MASORPA')
 DB_PATH = os.getenv('DB_PATH')
-ALLOWED_CHANNELS = ['bots', 'bot', 'bot-command', 'ambuscade']
+ALLOWED_CHANNELS = ['bots', 'bot', 'bot-command', 'bot-spam', 'ambuscade']
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
@@ -24,8 +24,8 @@ client = commands.Bot(command_prefix='!', intents=intents)
 #############################################################################
 ## Embed Configuration
 #############################################################################
-now = datetime.datetime.now()
 
+now = datetime.datetime.now()
 version_update_url = 'http://www.playonline.com/ff11us/index.shtml'
 reward_url = 'https://www.bg-wiki.com/ffxi/Category:Ambuscade#Rewards'
 footer_text = '© {year} - Created by Melucine@Bahamut'.format(year=now.year)
@@ -40,7 +40,7 @@ async def on_ready():
     daily_message.start()
 
 #############################################################################
-# Daily loop between 8th and 12th of the current month.
+# Daily loop between 8-11 of the current month.
 # The embedded message is the same for both the command and the looped message.
 #############################################################################
 
@@ -48,11 +48,10 @@ async def on_ready():
 async def daily_message():
     now = datetime.datetime.now()
     last_day_of_month = calendar.monthrange(now.year, now.month)[1]
-    start_date = datetime.datetime(now.year, now.month, 1)
-    end_date = datetime.datetime(now.year, now.month, min(12, last_day_of_month))
+    start_date = datetime.datetime(now.year, now.month, 8)
+    end_date = datetime.datetime(now.year, now.month, min(11, last_day_of_month))
 
     if start_date <= now <= end_date:
-        # Fetch the latest data from the database
         latest_update_date, latest_update_year = get_latest_update()
 
         for guild in client.guilds:
@@ -66,7 +65,7 @@ async def daily_message():
 
                         if int(latest_update_month_num) == now.month and int(latest_update_year) == now.year:
                             embed = discord.Embed(
-                                title='✉️  Message from Gorpa-Masorpa ✉️ ',
+                                title='✉️ Message from Gorpa-Masorpa ✉️',
                                 description='',
                                 color=0x808000)
                             
@@ -77,7 +76,6 @@ async def daily_message():
                             await channel.send(embed=embed)
 
                         else:
-
                             embed = discord.Embed(
                             title='Message from Gorpa-Masorpa',
                             description='',
@@ -90,7 +88,6 @@ async def daily_message():
                             await channel.send(embed=embed)
 
                     else:
-                            
                             embed = discord.Embed(
                             title='Message from Gorpa-Masorpa',
                             description='',
@@ -102,6 +99,9 @@ async def daily_message():
                             embed.set_footer(text=footer_text)
                             await channel.send(embed=embed)
 
+#############################################################################
+## Get Version Update Date, if available for current month
+#############################################################################
 
 def get_latest_update():
     conn = sqlite3.connect(DB_PATH)
@@ -130,6 +130,10 @@ def get_latest_update():
 
     conn.close()
 
-    # Return the latest update date and year
     return latest_update[0], latest_update[1] if latest_update else (None, None)
+
+#############################################################################
+## Run the bot
+#############################################################################
+
 client.run(TOKEN)

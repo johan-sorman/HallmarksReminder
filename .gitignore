@@ -50,3 +50,6 @@ luac.out
 
 # Old files but keep around for backup
 *.*old
+
+# Windows shortcuts
+*.lnk
