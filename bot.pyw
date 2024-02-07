@@ -77,7 +77,7 @@ async def daily_message():
 
                         else:
                             embed = discord.Embed(
-                            title='Message from Gorpa-Masorpa',
+                            title='✉️ Message from Gorpa-Masorpa ✉️',
                             description='',
                             color=0x808000)
 
@@ -89,7 +89,7 @@ async def daily_message():
 
                     else:
                             embed = discord.Embed(
-                            title='Message from Gorpa-Masorpa',
+                            title='✉️ Message from Gorpa-Masorpa ✉️',
                             description='',
                             color=0x808000)
 
