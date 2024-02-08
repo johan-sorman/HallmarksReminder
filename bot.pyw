@@ -14,7 +14,7 @@ load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN_HALLMARKS')
 DB_PATH = os.getenv('DB_PATH')
-ALLOWED_CHANNELS = ['bots', 'bot', 'bot-command', 'ambuscade']
+ALLOWED_CHANNELS = ['bots', 'bot', 'bot-command', 'bot-spam', 'ambuscade']
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
