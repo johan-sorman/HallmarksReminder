@@ -8,7 +8,7 @@
 
 ### Cool, how does it work?
 - Once per month the `main.pyw` will run to populate the `.db` file
-- Between the 8th and 12th of the month, the bot will remind the users. If the date hasn't been fetched yet for the current month, it will still post a reminder but the next version update can be found on the Playonline website.
+- Between the 8th and 11th of the month, the bot will remind the users. If the date hasn't been fetched yet for the current month, it will still post a reminder but the next version update can be found on the Playonline website.
 
 ### Setup
 The bot assumes at least one of the following channels:
